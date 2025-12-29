@@ -1,0 +1,138 @@
+Failure # 1 (occurred at 2025-10-17_02-58-04)
+The actor died unexpectedly before finishing this task.
+	class_name: wrap_function.<locals>.ImplicitFunc
+	actor_id: 328c45159bc7273f19a2e83a01000000
+	pid: 16271
+	namespace: 140eb2dc-604f-4470-a7b9-4c25ddb26451
+	ip: 172.30.0.2
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker exits unexpectedly. Worker exits with an exit code None.
+ Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/nibabel/loadsave.py", line 101, in load
+    stat_result = os.stat(filename)
+                  ^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/content/CardiacSegV2/dataset/chgh/patient0011.nii.gz'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/monai/transforms/transform.py", line 141, in apply_transform
+    return _apply_transform(transform, data, unpack_items, lazy, overrides, log_stats)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/transforms/transform.py", line 98, in _apply_transform
+    return transform(data, lazy=lazy) if isinstance(transform, LazyTrait) else transform(data)
+                                                                               ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/transforms/io/dictionary.py", line 164, in __call__
+    data = self._loader(d[key], reader)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/transforms/io/array.py", line 263, in __call__
+    img = reader.read(filename)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/data/image_reader.py", line 907, in read
+    img = nib.load(name, **kwargs_)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/nibabel/loadsave.py", line 103, in load
+    raise FileNotFoundError(f"No such file or no access: '{filename}'")
+FileNotFoundError: No such file or no access: '/content/CardiacSegV2/dataset/chgh/patient0011.nii.gz'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 1431, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1510, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1434, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1438, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1378, in ray._raylet.execute_task.function_executor
+  File "/usr/local/lib/python3.11/dist-packages/ray/_private/function_manager.py", line 724, in actor_method_executor
+    return method(__ray_actor, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ray/util/tracing/tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ray/tune/trainable/trainable.py", line 389, in train
+    raise skipped from exception_cause(skipped)
+  File "/usr/local/lib/python3.11/dist-packages/ray/tune/trainable/function_trainable.py", line 336, in entrypoint
+    return self._trainable_func(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ray/util/tracing/tracing_helper.py", line 464, in _resume_span
+    return method(self, *_args, **_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ray/tune/trainable/function_trainable.py", line 653, in _trainable_func
+    output = fn()
+             ^^^^
+  File "/content/CardiacSegV2/expers/tune.py", line 65, in main
+    main_worker(args)
+  File "/content/CardiacSegV2/expers/tune.py", line 218, in main_worker
+    loader = DataLoader(args.data_name, args)()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ray/session_2025-10-17_02-57-35_709641_15850/runtime_resources/working_dir_files/_ray_pkg_140cc096df42e7c0/data_utils/dataset.py", line 28, in __call__
+    return self.dl.get_loader()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/ray/session_2025-10-17_02-57-35_709641_15850/runtime_resources/working_dir_files/_ray_pkg_140cc096df42e7c0/data_utils/data_loader.py", line 64, in get_loader
+    train_loader = get_dl(
+                   ^^^^^^^
+  File "/tmp/ray/session_2025-10-17_02-57-35_709641_15850/runtime_resources/working_dir_files/_ray_pkg_140cc096df42e7c0/data_utils/data_loader.py", line 13, in get_dl
+    ds = CacheDataset(
+         ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/data/dataset.py", line 821, in __init__
+    self.set_data(data)
+  File "/usr/local/lib/python3.11/dist-packages/monai/data/dataset.py", line 848, in set_data
+    self._cache = self._fill_cache(indices)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/data/dataset.py", line 877, in _fill_cache
+    return list(tqdm(p.imap(self._load_cache_item, indices), total=len(indices), desc="Loading dataset"))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+  File "/usr/lib/python3.11/multiprocessing/pool.py", line 873, in next
+    raise value
+  File "/usr/lib/python3.11/multiprocessing/pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/data/dataset.py", line 890, in _load_cache_item
+    item = self.transform(item, end=first_random, threading=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/transforms/compose.py", line 322, in __call__
+    result = execute_compose(
+             ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/transforms/compose.py", line 111, in execute_compose
+    data = apply_transform(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/monai/transforms/transform.py", line 171, in apply_transform
+    raise RuntimeError(f"applying transform {transform}") from e
+RuntimeError: applying transform <monai.transforms.io.dictionary.LoadImaged object at 0x7dbe9c2f5550>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/dist-packages/ray/cloudpickle/cloudpickle_fast.py", line 733, in dump
+    return Pickler.dump(self, obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ray/cloudpickle/cloudpickle_fast.py", line 826, in reducer_override
+    if sys.version_info[:2] < (3, 7) and _is_parametrized_type_hint(
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded in comparison
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "python/ray/_raylet.pyx", line 1796, in ray._raylet.task_execution_handler
+  File "python/ray/_raylet.pyx", line 1695, in ray._raylet.execute_task_with_cancellation_handler
+  File "python/ray/_raylet.pyx", line 1380, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 1595, in ray._raylet.execute_task
+  File "python/ray/_raylet.pyx", line 875, in ray._raylet.store_task_errors
+  File "python/ray/_raylet.pyx", line 3456, in ray._raylet.CoreWorker.store_task_outputs
+  File "/usr/local/lib/python3.11/dist-packages/ray/_private/serialization.py", line 466, in serialize
+    return self._serialize_to_msgpack(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ray/_private/serialization.py", line 421, in _serialize_to_msgpack
+    value = value.to_bytes()
+            ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ray/exceptions.py", line 32, in to_bytes
+    serialized_exception=pickle.dumps(self),
+                         ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/ray/cloudpickle/cloudpickle_fast.py", line 88, in dumps
+    cp.dump(obj)
+  File "/usr/local/lib/python3.11/dist-packages/ray/cloudpickle/cloudpickle_fast.py", line 739, in dump
+    raise pickle.PicklingError(msg) from e
+_pickle.PicklingError: Could not pickle object as excessively deep recursion required.
+An unexpected internal error occurred while the worker was executing a task.
