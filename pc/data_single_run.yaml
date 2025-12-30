@@ -1,0 +1,6 @@
+
+path: .
+train: datasets/train/images
+val: datasets/val/images
+names: ['aortic_valve']
+nc: 1

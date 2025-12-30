@@ -1,0 +1,5 @@
+path: .
+train: C:\Users\Lab902\Desktop\week8\pc\datasets\train\images
+val: C:\Users\Lab902\Desktop\week8\pc\datasets\val\images
+names: ['aortic_valve']
+nc: 1
