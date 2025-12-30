@@ -1,7 +1,7 @@
 # NKUST 類神經網路期末報告
 **隊伍：TEAM_8944**
 
-**隊員：陳相圖 吳澤延**
+**隊員：[陳相圖](https://github.com/35783329jeff1122)、[吳澤延](https://github.com/Olive020)**
 
 **Private leaderboard：0.947555 / Rank 104**
 
@@ -27,7 +27,7 @@
 ## 貳、模型設計與訓練策略
 
 ### 一、模型訓練與預測原始程式碼
-**GitHub 連結：** [請在此處貼上您的 GitHub Repository 連結]
+**GitHub 連結：** https://github.com/Olive020/TEAM_8944
 *(註：本連結包含完整的 `train_yolo_optimized.py`、環境設定檔 `requirements.txt` 以及推論腳本，並附有詳細 README 說明如何重現訓練結果。)*
 
 ### 二、說明
